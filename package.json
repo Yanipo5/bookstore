@@ -1,0 +1,31 @@
+{
+  "name": "bookstore",
+  "version": "1.0.0",
+  "description": "Totango Bookstore Exercise",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Yaniv Peretz",
+  "license": "GPL-3.0",
+  "dependencies": {
+    "angular": "^1.6.9",
+    "body-parser": "^1.18.2",
+    "bootstrap": "^4.0.0",
+    "dotenv": "^5.0.0",
+    "express": "^4.16.2",
+    "express-router": "^0.0.1",
+    "jquery": "^3.3.1",
+    "knex": "^0.14.2",
+    "popper.js": "^1.12.9"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Yanipo5/bookstore.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Yanipo5/bookstore/issues"
+  },
+  "homepage": "https://github.com/Yanipo5/bookstore#readme"
+}
