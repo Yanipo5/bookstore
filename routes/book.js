@@ -12,7 +12,7 @@ router.get("/:id", (req, res) => {
         .then(book => {
             res.json(book)
         }).catch(err => {
-            res.sendStatus(204);
+            res.sendStatus(404);
         })
 });
 
@@ -40,13 +40,12 @@ router.put("/", (req, res) => {
     book.updated_at = new Date();
     delete book.created_at;
 
-    console.log(book);
     Book.forge({ id: book.id })
         .save(book)
         .then(() => {
             res.sendStatus(200);
         }).catch(err => {
-            console.log(err);
+            console.error(err);
             res.sendStatus(400);
         })
 });
