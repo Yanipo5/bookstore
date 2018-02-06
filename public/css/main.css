@@ -3,6 +3,14 @@
     margin: auto;
 }
 
+.bottom-margin{
+    margin-bottom: 10px;
+}
+
+.fill-space{
+    width: 100%;
+}
+
 .books-container{
     display: flex;
     flex-direction: row;
