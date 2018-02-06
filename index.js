@@ -1,8 +1,12 @@
 require('dotenv').config();
 const express = require('express');
+const morgan = require(`${__dirname}/util/morgan`);
 const app = express();
 const bodyParser = require('body-parser');
 const port = process.env.PORT || 8080;
+
+// setup the logger
+app.use(morgan)
 
 /*#######################
 * url Handeling sequance
