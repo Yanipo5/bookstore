@@ -1,32 +1,65 @@
 const express = require("express");
 const router = express.Router();
+const Book = require('../models/book').Book
 
 /**
  * @returns book details by ID
  */
 router.get("/:id", (req, res) => {
-    res.sendStatus(200);
+    const id = req.params.id;
+    Book.where({ 'id': id })
+        .fetch()
+        .then(book => {
+            res.json(book)
+        }).catch(err => {
+            res.sendStatus(204);
+        })
 });
 
 /**
- * @returns create new book
+ * @returns create new book, and return the book with the new ID
  */
 router.post("/", (req, res) => {
-    res.sendStatus(200);
+    const book = req.body;
+    book.publication_date = new Date(book.publication_date)
+    Book.forge(book)
+        .save()
+        .then(savedBook => {
+            res.json(savedBook);
+        }).catch(err => {
+            res.sendStatus(400);
+        })
 });
 
 /**
  * @returns edit book details by ID
  */
 router.put("/:id", (req, res) => {
-    res.sendStatus(200);
+    const id = req.params.id;
+    const book = req.body;
+    book.publication_date = new Date(book.publication_date);
+    book.updated_at = new Date();
+    Book.forge({ 'id': id })
+        .save(book)
+        .then(() => {
+            res.sendStatus(200);
+        }).catch(err => {
+            res.sendStatus(400);
+        })
 });
 
 /**
  * @returns delete book by id
  */
 router.delete("/:id", (req, res) => {
-    res.sendStatus(200);
+    const id = req.params.id;
+    Book.where({ 'id': id })
+        .destroy()
+        .then(() => {
+            res.sendStatus(200);
+        }).catch(err => {
+            res.sendStatus(204);
+        })
 });
 
 module.exports = router;

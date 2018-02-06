@@ -1,5 +1,6 @@
 exports.TABLES = {
     BOOKS: {
+        id: 'id',
         name: 'books',
         title: 'title',
         description: 'description',

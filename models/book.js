@@ -1,9 +1,9 @@
 const bookshelf = require('../util/bookshelf');
 const knex = require(`../util/knex.js`);
-const constants = require(`../util/constants.js`).TABLES;
+const TABLES = require(`../util/constants.js`).TABLES;
 
-const bookTableName = TABLES.BOOKS
-exports.Book = bookshelf.Model
+const bookTableName = TABLES.BOOKS.name
+var Book = bookshelf.Model
     .extend({
         tableName: bookTableName,
         idAttribute: 'id',
