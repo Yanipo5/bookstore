@@ -37,3 +37,7 @@
     height: 16px;
     width: 16px;
 }
+
+.book-form-table tr td::first-letter{
+    text-transform: capitalize;
+}
