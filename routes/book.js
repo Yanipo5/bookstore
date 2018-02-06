@@ -34,16 +34,19 @@ router.post("/", (req, res) => {
 /**
  * @returns edit book details by ID
  */
-router.put("/:id", (req, res) => {
-    const id = req.params.id;
-    const book = req.body;
+router.put("/", (req, res) => {
+    let book = req.body;
     book.publication_date = new Date(book.publication_date);
     book.updated_at = new Date();
-    Book.forge({ 'id': id })
+    delete book.created_at;
+
+    console.log(book);
+    Book.forge({ id: book.id })
         .save(book)
         .then(() => {
             res.sendStatus(200);
         }).catch(err => {
+            console.log(err);
             res.sendStatus(400);
         })
 });

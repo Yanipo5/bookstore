@@ -13,9 +13,6 @@ app.use('/api', routes);
 // setting routes for static webpages
 app.use(express.static(`${__dirname}/public`))
 // a script tag to your application's JavaScript file(s) - required for react router BrowserHistory.
-app.get('*', (request, response) => {
-  response.sendFile(`${__dirname}/public/index.html`);
-})
 
 //Error Handlers (Must be at the bottom!!!)
 // require('./routes/errorHandeling.js');

@@ -7,7 +7,7 @@ exports.up = function (knex, Promise) {
         .createTableIfNotExists(booksTable.name, table => {
             table.increments();
             table.string(booksTable.title).notNullable();
-            table.string(booksTable.description).notNullable();
+            table.string(booksTable.description, 2040).notNullable();
             table.integer(booksTable.ISBN).notNullable();
             table.string(booksTable.author).notNullable();
             table.date(booksTable.publication_date).notNullable();

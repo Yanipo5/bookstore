@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Bookstore</title>
+
+    <!-- scripts -->
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="node_modules/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="node_modules/angular/angular.min.js"></script>
+
+    <!-- styles -->
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/main.css">
+
+</head>
+
+<body ng-app="main" ng-controller="main-controller">
+    <h1 class="center">Bookstore</h1>
+
+    <div class="center">
+        <div ng-click="setNewModal()" data-toggle="modal" data-target="#BookModal" class="btn btn-primary">
+            <svg class="icon">
+                <use xlink:href="node_modules/bytesize-icons/dist/bytesize-inline.svg#i-plus"></use>
+            </svg>
+            Add Book
+        </div>
+
+        <div class="books-container">
+            <div class="book" ng-repeat="book in catalog | orderBy : 'title'">
+                <p class="bookTitle">{{book.title}}</p>
+                <span ng-click="setEditModal(book.id)" class="btn btn-outline-dark btn-sm" data-toggle="modal" data-target="#BookModal">
+                    <svg class="icon">
+                        <use xlink:href="node_modules/bytesize-icons/dist/bytesize-inline.svg#i-edit"></use>
+                    </svg>
+                    edit</span>
+                <span ng-click="promptDelete(book.id)" class="btn btn-outline-danger btn-sm">
+                    <svg class="icon">
+                        <use xlink:href="node_modules/bytesize-icons/dist/bytesize-inline.svg#i-trash"></use>
+                    </svg>
+                    remove</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- #######################
+            Modals
+        #######################-->
+    <!-- Company Modal -->
+    <div class="modal fade" id="BookModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h5 ng-show="isNewCompany" class="modal-title" id="exampleModalLabel">Add New Company</h5>
+                    <h5 ng-hide="isNewCompany" class="modal-title" id="exampleModalLabel">Edit Company</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form name="bookModal">
+
+                        <table>
+                            <thead></thead>
+                            <tbody>
+                                <tr>
+                                    <td>Id:</td>
+                                    <td>
+                                        <input class="form-control" disabled ng-model="modalBook.id">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Title:</td>
+                                    <td>
+                                        <input class="form-control" ng-model="modalBook.title" required>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>description:</td>
+                                    <td>
+                                        <textarea class="form-control" ng-model="modalBook.description" required></textarea>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>ISBN:</td>
+                                    <td>
+                                        <input type="number" class="form-control" ng-model="modalBook.ISBN" required>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>author:</td>
+                                    <td>
+                                        <input class="form-control" ng-model="modalBook.author" required>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>publication_date:</td>
+                                    <td>
+                                        <input type="date" class="form-control" ng-model="modalBook.publication_date" required>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>genre:</td>
+                                    <td>
+                                        <select ng-model="modalBook.genre" required>
+                                            <option value="Science fiction">Science fiction</option>
+                                            <option value="Satire">Satire</option>
+                                            <option value="Drama">Drama</option>
+                                            <option value="Action">Action</option>
+                                            <option value="Romance">Romance</option>
+                                            <option value="Mystery">Mystery</option>
+                                            <option value="Horror">Horror</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>price:</td>
+                                    <td>
+                                        <input type="number" class="form-control" ng-model="modalBook.price" required>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button ng-show="isNew" ng-disabled="!bookModal.$valid" type="button" class="btn btn-primary" ng-click="addBook()" data-dismiss="modal">Save New Book</button>
+                    <button ng-hide="isNew" ng-disabled="!bookModal.$valid" type="button" class="btn btn-primary" ng-click="updateBook()" data-dismiss="modal">Update Book</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="js/main-controller.js"></script>
+</body>
+
+</html>
