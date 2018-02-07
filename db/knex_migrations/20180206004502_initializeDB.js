@@ -13,7 +13,7 @@ exports.up = function(knex, Promise) {
     table.enu(booksTable.genre, GENERES).notNullable();
     table.integer(booksTable.price).notNullable();
     table.timestamp(booksTable.created_at).defaultTo(knex.fn.now());
-    table.timestamp(booksTable.updated_at);
+    table.timestamp(booksTable.updated_at).defaultTo(knex.fn.now());
   });
 };
 

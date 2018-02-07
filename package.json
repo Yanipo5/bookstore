@@ -6,7 +6,8 @@
   "scripts": {
     "test": "mocha test --exit",
     "initDB": "mysql -u root -p < db/init.sql",
-    "hot": "browser-sync start --proxy 'http://localhost:9000/' --files 'public'"
+    "hot": "browser-sync start --proxy 'http://localhost:9000/' --files 'public'",
+    "build": "npm run initDB; knex migrate:latest; knex seed:run;"
   },
   "author": "Yaniv Peretz",
   "license": "GPL-3.0",
