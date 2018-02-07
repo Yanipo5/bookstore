@@ -14,6 +14,7 @@ Tests: Mocha, supertest
 
 * `yarn install` or `npm install` to get all packages
 * in public folder`yarn install` or `npm install` to get all client side packages
+* create a db shema, or run `npm run initDB` (runs as root -p)
 * create a new .env file from the .env-example file and provide DB access details
 * `knex migrate:latest` - to build to application tables
 * `knex seed:run` - to populate with initial data
