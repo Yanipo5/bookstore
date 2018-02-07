@@ -23,6 +23,7 @@ router.get("/:id", (req, res) => {
 router.post("/", (req, res) => {
   const book = req.body;
   book.publication_date = new Date(book.publication_date);
+  book.updated_at = new Date();
   Book.forge(book)
     .save()
     .then(savedBook => {
