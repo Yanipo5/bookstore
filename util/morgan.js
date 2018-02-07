@@ -14,5 +14,11 @@ var accessLogStream = rfs('access.log', {
   path: logDirectory
 })
 
+// Custom morgan token - loggin request body
+morgan.token('body',(req) => {
+  return JSON.stringify(req.body)
+})
+
+const morganFormat = ':remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:http-version" :status :body :res[content-length] ":referrer" ":user-agent"'
 // setup the logger
-module.exports = morgan('combined', {stream: accessLogStream})
+module.exports = morgan(morganFormat, {stream: accessLogStream})
