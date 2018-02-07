@@ -1,21 +1,21 @@
-require('dotenv').config();
-const express = require('express');
+require("dotenv").config();
+const express = require("express");
 const morgan = require(`${__dirname}/util/morgan`);
 const app = express();
-const bodyParser = require('body-parser');
+const bodyParser = require("body-parser");
 const port = process.env.PORT || 8080;
 
 // setup the logger
-app.use(morgan)
+app.use(morgan);
 
 /*#######################
 * url Handeling sequance
 * #######################*/
 // setting routes for API
 const routes = require(`${__dirname}/routes/index.js`);
-app.use('/api', routes);
+app.use("/api", routes);
 // setting routes for static webpages
-app.use(express.static(`${__dirname}/public`))
+app.use(express.static(`${__dirname}/public`));
 // a script tag to your application's JavaScript file(s) - required for react router BrowserHistory.
 
 //Error Handlers (Must be at the bottom!!!)
