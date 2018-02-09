@@ -4,6 +4,7 @@
   "description": "Totango Bookstore Exercise",
   "main": "index.js",
   "scripts": {
+    "postinstall": "cd public; yarn",
     "test": "mocha test --exit",
     "initDB": "mysql -u root -p < db/init.sql",
     "hot": "browser-sync start --proxy 'http://localhost:9000/' --files 'public'",
