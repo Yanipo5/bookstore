@@ -15,6 +15,7 @@
 
     <!-- styles -->
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="node_modules/animate.css/animate.min.css">
     <link rel="stylesheet" href="css/main.css">
 
 </head>
@@ -31,7 +32,7 @@
         </div>
 
         <div class="books-container">
-            <div class="book" ng-repeat="book in catalog | orderBy : 'title'">
+            <div class="book" ng-repeat="book in catalog | orderBy : 'title'" id={{'b'+book.id}}>
                 <p class="bookTitle">{{book.title}}</p>
                 <span ng-click="setEditModal(book.id)" class="btn btn-outline-dark btn-sm" data-toggle="modal" data-target="#BookModal">
                     <svg class="icon">
