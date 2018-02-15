@@ -32,19 +32,7 @@
         </div>
 
         <div class="books-container">
-            <div class="book" ng-repeat="book in catalog | orderBy : 'title'" id={{'b'+book.id}}>
-                <p class="bookTitle">{{book.title}}</p>
-                <span ng-click="setEditModal(book.id)" class="btn btn-outline-dark btn-sm" data-toggle="modal" data-target="#BookModal">
-                    <svg class="icon">
-                        <use xlink:href="node_modules/bytesize-icons/dist/bytesize-inline.svg#i-edit"></use>
-                    </svg>
-                    edit</span>
-                <span ng-click="promptDelete(book.id)" class="btn btn-outline-danger btn-sm">
-                    <svg class="icon">
-                        <use xlink:href="node_modules/bytesize-icons/dist/bytesize-inline.svg#i-trash"></use>
-                    </svg>
-                    remove</span>
-            </div>
+            <book ng-repeat="book in catalog | orderBy : 'title'"></book>
         </div>
     </div>
 
@@ -138,6 +126,7 @@
         </div>
     </div>
     <script src="js/main-controller.js"></script>
+    <script src="js/directives/book.js"></script>
 </body>
 
 </html>
