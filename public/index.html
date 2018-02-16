@@ -32,7 +32,7 @@
         </div>
 
         <div class="books-container">
-            <book ng-repeat="book in catalog | orderBy : 'title'"></book>
+            <book ng-repeat="book in catalog | orderBy : 'title'" data-directive="book" data-remove="promptDelete(book.id)" data-edit="setEditModal(book.id)"></book>
         </div>
     </div>
 
