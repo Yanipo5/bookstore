@@ -1,11 +1,21 @@
-const express = require("express");
-const router = express.Router();
-const Book = require("../models/book").Book;
+const Book = require("../../models/book").Book,
+  knex = require("../../util/knex"),
+  TABLES = require("../../util/constants").TABLES,
+  booksTable = TABLES.BOOKS;
 
-/**
- * @returns book details by ID
- */
-router.get("/:id", (req, res) => {
+exports.getBooks = (req, res) => {
+  knex
+    .select(booksTable.id, booksTable.title)
+    .from(booksTable.name)
+    .then(results => {
+      res.json(results);
+    })
+    .catch(err => {
+      res.sendStatus(500);
+    });
+};
+
+exports.getBook = (req, res) => {
   const id = req.params.id;
   Book.where({ id: id })
     .fetch()
@@ -15,13 +25,17 @@ router.get("/:id", (req, res) => {
     .catch(err => {
       res.sendStatus(404);
     });
-});
+};
 
-/**
- * @returns create new book, and return the book with the new ID
- */
-router.post("/", (req, res) => {
+exports.createBook = (req, res) => {
+  if(req.body.id !== undefined){
+    res.sendStatus(400);
+    return;
+  }
+  
   const book = req.body;
+  // ensure no book id is supplied
+  delete book.id;
   book.publication_date = new Date(book.publication_date);
   book.updated_at = new Date();
   Book.forge(book)
@@ -32,12 +46,14 @@ router.post("/", (req, res) => {
     .catch(err => {
       res.sendStatus(400);
     });
-});
+};
 
-/**
- * @returns edit book details by ID
- */
-router.put("/", (req, res) => {
+exports.updateBook = (req, res) => {
+  if(Number(req.params.id) !== req.body.id){
+    res.sendStatus(400);
+    return;
+  }
+
   let book = req.body;
   book.publication_date = new Date(book.publication_date);
   book.updated_at = new Date();
@@ -52,12 +68,9 @@ router.put("/", (req, res) => {
       console.error(err);
       res.sendStatus(400);
     });
-});
+};
 
-/**
- * @returns delete book by id
- */
-router.delete("/:id", (req, res) => {
+exports.removeBooks = (req, res) => {
   const id = req.params.id;
   Book.where({ id: id })
     .destroy()
@@ -67,6 +80,4 @@ router.delete("/:id", (req, res) => {
     .catch(err => {
       res.sendStatus(204);
     });
-});
-
-module.exports = router;
+};

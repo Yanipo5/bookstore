@@ -4,8 +4,18 @@ const assert = require("assert");
 
 var newItemId;
 
-describe("book routes", function() {
-  it("create new book", function() {
+describe("book api routes", function() {
+  it("respond with json", () => {
+    return request
+      .get("/api/book")
+      .set("Accept", "application/json")
+      .expect(200)
+      .then(response => {
+        assert(response.body.length > 0);
+      });
+  });
+
+  it("create new book", () => {
     return request
       .post("/api/book")
       .set("Accept", "application/json")
@@ -24,7 +34,7 @@ describe("book routes", function() {
       });
   });
 
-  it("find book by ID", function() {
+  it("find book by ID", () => {
     return request
       .get(`/api/book/${newItemId}`)
       .set("Accept", "application/json")
@@ -34,7 +44,7 @@ describe("book routes", function() {
       });
   });
 
-  it("update book details", function() {
+  it("update book details", () => {
     return request
       .put(`/api/book/`)
       .set("Accept", "application/json")
@@ -60,7 +70,7 @@ describe("book routes", function() {
       });
   });
 
-  it("Delete book", function() {
+  it("Delete book", () => {
     return request
       .delete(`/api/book/${newItemId}`)
       .set("Accept", "application/json")

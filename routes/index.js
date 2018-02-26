@@ -8,8 +8,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 /** ############################
  *      Mapping api routes
  ############################ */
-app.use("/book", require("./book.js"));
-app.use("/catalog", require("./catalog.js"));
+app.use("/book", require("./routers/book.js"));
 
 /** ############################
  *      THESE ROUTES MUST BE LAST

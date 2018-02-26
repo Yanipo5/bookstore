@@ -1,9 +1,9 @@
 require("dotenv").config();
-const express = require("express");
-const morgan = require(`${__dirname}/util/morgan`);
-const app = express();
-const bodyParser = require("body-parser");
-const port = process.env.PORT || 8080;
+const express = require("express"),
+  app = express(),
+  morgan = require(`${__dirname}/util/morgan`),
+  bodyParser = require("body-parser"),
+  PORT = process.env.PORT || 8080;
 
 // setup the logger
 app.use(morgan);
@@ -12,8 +12,7 @@ app.use(morgan);
 * url Handeling sequance
 * #######################*/
 // setting routes for API
-const routes = require(`${__dirname}/routes/index.js`);
-app.use("/api", routes);
+app.use("/api", require(`${__dirname}/routes/`));
 // setting routes for static webpages
 app.use(express.static(`${__dirname}/public`));
 // a script tag to your application's JavaScript file(s) - required for react router BrowserHistory.
@@ -23,7 +22,7 @@ app.use(express.static(`${__dirname}/public`));
 /*#####    END     #####*/
 
 //Start Node Server
-app.listen(port);
-console.log(`Node js listen on port ${port}...`);
+app.listen(PORT);
+console.log(`Node js listen on port ${PORT}...`);
 
 module.exports = app;
