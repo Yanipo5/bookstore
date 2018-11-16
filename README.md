@@ -2,8 +2,6 @@
 
 Crud persistant Book Entity.
 
-## View: http://ec2-52-59-194-236.eu-central-1.compute.amazonaws.com:8082/
-
 ### Tech Stack
 
 Server: Node.js express, Knex, Bookshelf (ORM), morgan (Logger)  
